@@ -11,6 +11,7 @@ carimg=pygame.image.load("ui.png")
 backgroundpic=pygame.image.load("download12.jpg")
 yellow_strip=pygame.image.load("yellow strip.jpg")
 strip=pygame.image.load("strip.jpg")
+car_width=53
 
 def background():
 	gamedisplays.blit(backgroundpic,(0,0))
@@ -62,6 +63,8 @@ def game_loop():
 		gamedisplays.fill(blue)
 		background()
 		car(x,y)
+		if x>640-car_width or x<160:
+			bumped=True
 		pygame.display.update()
 		clock.tick(60)
 
