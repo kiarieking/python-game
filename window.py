@@ -1,7 +1,8 @@
 import pygame
 pygame.init()
-
+import time
 blue=(116,191,247)
+black=(0,0,0)
 display_width=800
 display_height=600
 gamedisplays=pygame.display.set_mode((display_width,display_height))
@@ -12,6 +13,23 @@ backgroundpic=pygame.image.load("download12.jpg")
 yellow_strip=pygame.image.load("yellow strip.jpg")
 strip=pygame.image.load("strip.jpg")
 car_width=53
+
+
+def text_objects(text,font):
+	textsurface=font.render(text,True,black)
+	return textsurface,textsurface.get_rect()
+
+def message_display(text):
+	largetext=pygame.font.Font("freesansbold.ttf",80)
+	textsurf,textrect=text_objects(text,largetext)
+	textrect.center=((display_width/2),(display_height/2))
+	gamedisplays.blit(textsurf,textrect)
+	pygame.display.update()
+	time.sleep(3)
+	game_loop()
+
+def crash():
+	message_display("GAME OVER")		
 
 def background():
 	gamedisplays.blit(backgroundpic,(0,0))
@@ -64,7 +82,7 @@ def game_loop():
 		background()
 		car(x,y)
 		if x>640-car_width or x<160:
-			bumped=True
+			crash()
 		pygame.display.update()
 		clock.tick(60)
 
